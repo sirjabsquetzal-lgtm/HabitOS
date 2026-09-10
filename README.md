@@ -1,3 +1,12 @@
+## Implementation
+
+The real, installable app lives in `app/` — a framework-free HTML/CSS/JS PWA that
+ports `project/Habit Tracker.dc.html` pixel-for-pixel, with data stored on-device
+(localStorage + IndexedDB) and no build step. See `app/README.md` for how to publish
+it and install it from Brave.
+
+---
+
 # CODING AGENTS: READ THIS FIRST
 
 This is a **handoff bundle** from Claude Design (claude.ai/design).
