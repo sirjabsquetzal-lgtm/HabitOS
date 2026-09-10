@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-fda95f0c-0b7d-4966-91db-2c9f9c7ed41f/styles.css">
+<script src="_ds/modernist-fda95f0c-0b7d-4966-91db-2c9f9c7ed41f/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Doto:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #f3f2f2; }
+  * { box-sizing: border-box; }
+  [data-theme="paper"] { --paper:#f3f2f2; --ink:#131211; --surf:#e7e6e5; --line:rgba(19,18,17,.22); --hard:rgba(19,18,17,.6); --dim:rgba(19,18,17,.52); --red:#ec3013; --glow:none; --gridline:rgba(19,18,17,.06); }
+  [data-theme="dark"] { --paper:#08090a; --ink:#f2f1f0; --surf:#111314; --line:rgba(242,241,240,.18); --hard:rgba(242,241,240,.5); --dim:rgba(242,241,240,.5); --red:#ff3b1d; --glow:0 0 18px rgba(255,59,29,.35); --gridline:rgba(242,241,240,.05); }
+  [data-anim="1"] * { transition: background-color 1400ms linear, color 1400ms linear, border-color 1400ms linear, fill 1400ms linear, stroke 1400ms linear; }
+  input, textarea, button, select { font-family: Archivo, sans-serif; }
+  a { color: #ec3013; text-decoration: none; }
+  a:hover { color: #ae1800; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  ::selection { background: rgba(236,48,19,.28); }
+  [data-glow="1"] { box-shadow: var(--glow); }
+  ::-webkit-scrollbar { height: 6px; width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--line); }
+  @keyframes blip { 0%,100% { opacity:1 } 50% { opacity:.25 } }
+</style>
+</helmet>
+<div data-theme="{{ theme }}" data-anim="{{ anim }}" style="min-height:100vh;background:var(--paper);color:var(--ink);font-family:Archivo,sans-serif;-webkit-font-smoothing:antialiased">
+  <div style="max-width:940px;margin:0 auto;padding:0 16px 96px">
+
+    <header style="display:flex;flex-direction:column;gap:9px;padding:16px 0 12px;border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:20">
+      <div style="display:grid;grid-template-columns:36px minmax(0,1fr) 36px;align-items:center;gap:10px">
+        <div style="width:36px;height:36px">
+          <sc-if value="{{ notMenu }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ goMenu }}" style="width:36px;height:36px;display:grid;place-items:center;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer" style-hover="background:var(--red);border-color:var(--red);color:#fff">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 5l-7 7 7 7"></path></svg>
+            </button>
+          </sc-if>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:9px;min-width:0">
+          <span style="width:7px;height:7px;background:var(--red);animation:blip 2.4s infinite;flex:none"></span>
+          <span style="font-size:21px;font-weight:800;letter-spacing:.16em;white-space:nowrap">HabitOS</span>
+        </div>
+        <button onClick="{{ openSettings }}" aria-label="Settings" style="width:36px;height:36px;display:grid;place-items:center;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;flex:none" style-hover="background:var(--red);border-color:var(--red);color:#fff">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.09A1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:5px">
+        <div style="font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);text-align:center">{{ screenTitle }}</div>
+        <span style="width:26px;height:2px;background:var(--red)"></span>
+      </div>
+    </header>
+
+    <sc-if value="{{ isMenu }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <nav style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">
+          <sc-for list="{{ tiles }}" as="tile" hint-placeholder-count="5">
+            <button onClick="{{ tile.go }}" style="grid-column:{{ tile.span }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:{{ tile.minH }}px;padding:18px 12px 20px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;text-align:center" style-hover="background:var(--surf);border-color:var(--red)">
+              <svg viewBox="0 0 48 48" style="width:{{ tile.iconSize }}px;height:{{ tile.iconSize }}px;flex:none" fill="none" stroke="var(--red)" stroke-width="1.6" stroke-linejoin="miter" stroke-linecap="butt">
+                <sc-for list="{{ tile.sym }}" as="p" hint-placeholder-count="2">
+                  <path d="{{ p }}"></path>
+                </sc-for>
+              </svg>
+              <span style="display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0">
+                <span style="font-size:17px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap">{{ tile.label }}</span>
+                <span style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-align:center">{{ tile.sub }}</span>
+              </span>
+            </button>
+          </sc-for>
+        </nav>
+
+        <section data-glow="1" style="margin-top:34px;border:1px solid var(--hard);position:relative;padding:20px 16px 26px;background:var(--surf)">
+          <span style="position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--red);border-left:2px solid var(--red)"></span>
+          <span style="position:absolute;top:-1px;right:-1px;width:14px;height:14px;border-top:2px solid var(--red);border-right:2px solid var(--red)"></span>
+          <span style="position:absolute;bottom:-1px;left:-1px;width:14px;height:14px;border-bottom:2px solid var(--red);border-left:2px solid var(--red)"></span>
+          <span style="position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--red);border-right:2px solid var(--red)"></span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);text-align:center">{{ t.generalScore }}</div>
+            <div style="display:flex;align-items:center;gap:2px">
+              <button onClick="{{ prevYear }}" style="width:32px;height:32px;display:grid;place-items:center;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer" style-hover="border-color:var(--red);color:var(--red)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 5l-7 7 7 7"></path></svg>
+              </button>
+              <div style="min-width:82px;text-align:center;font-family:Doto,Archivo,sans-serif;font-weight:800;font-size:19px;letter-spacing:.12em">{{ year }}</div>
+              <button onClick="{{ nextYear }}" style="width:32px;height:32px;display:grid;place-items:center;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer" style-hover="border-color:var(--red);color:var(--red)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div style="display:grid;place-items:center;padding:14px 0 0">
+            <img src="{{ yearBadge.src }}" alt="" style="width:100%;max-width:240px;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block;border:1px solid var(--line)">
+            <div style="display:flex;align-items:flex-end;gap:12px;margin-top:8px">
+              <div style="font-family:Doto,Archivo,sans-serif;font-weight:900;font-size:58px;line-height:.9;letter-spacing:.04em">{{ yearBadge.rank }}</div>
+              <div style="display:flex;flex-direction:column;gap:5px;padding-bottom:7px">
+                <span style="width:34px;height:3px;background:var(--red)"></span>
+                <span style="font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim)">{{ yearPctLabel }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="margin-top:8px;border:1px solid var(--hard);padding:18px 12px 20px">
+          <div style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;text-align:center">{{ t.badgesEarned }}</div>
+          <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px">
+            <sc-for list="{{ rankTally }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 3px 9px;border:1px solid {{ r.bd }};background:{{ r.bg }};min-width:0">
+                <img src="{{ r.b.src }}" alt="" style="width:100%;max-width:54px;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block;opacity:{{ r.op }};border:1px solid var(--line)">
+                <span style="font-family:Doto,Archivo,sans-serif;font-size:24px;font-weight:900;line-height:1;color:{{ r.fg }}">{{ r.rank }}</span>
+                <span style="width:16px;height:2px;background:{{ r.countColor }}"></span>
+                <span style="font-family:Doto,Archivo,sans-serif;font-size:14px;font-weight:900;color:{{ r.countColor }}">{{ r.count }}</span>
+                <span style="font-size:8px;letter-spacing:.14em;color:var(--dim)">{{ r.threshold }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isRegistros }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex;gap:10px;padding:16px 0 14px;flex-wrap:wrap">
+          <button onClick="{{ toggleMonthPicker }}" style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--ink);color:var(--paper);border:0;cursor:pointer;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">
+            <span>{{ monthLabel }}</span>
+            <span style="font-family:Doto,Archivo,sans-serif;font-weight:900;color:var(--red)">{{ year }}</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)">
+            <span style="width:5px;height:5px;background:var(--red)"></span>
+            <span>{{ monthTotalLabel }} {{ t.pts }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ monthPicker }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px solid var(--hard);padding:14px;margin-bottom:16px;background:var(--surf)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <button onClick="{{ prevYear }}" style="width:32px;height:32px;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer">‹</button>
+              <div style="font-family:Doto,Archivo,sans-serif;font-weight:800;font-size:19px;letter-spacing:.1em">{{ year }}</div>
+              <button onClick="{{ nextYear }}" style="width:32px;height:32px;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer">›</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+              <sc-for list="{{ monthOptions }}" as="mo" hint-placeholder-count="12">
+                <button onClick="{{ mo.go }}" style="padding:12px 4px;background:{{ mo.bg }};color:{{ mo.fg }};border:1px solid var(--line);cursor:pointer;font-size:11px;letter-spacing:.14em;font-weight:700">{{ mo.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--hard);margin-bottom:24px">
+          <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="4">
+            <button onClick="{{ tb.go }}" style="padding:13px 4px;background:{{ tb.bg }};color:{{ tb.fg }};border:0;border-right:1px solid var(--line);cursor:pointer;font-size:10px;letter-spacing:.18em;font-weight:800;text-transform:uppercase">{{ tb.label }}</button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ isHighlights }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;margin-bottom:12px">
+              <h2 style="margin:0;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);text-align:center">{{ t.dailyHighlights }}</h2>
+              <span style="font-size:10px;color:var(--red);letter-spacing:.2em;text-transform:uppercase;text-align:center">{{ favCountLabel }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <sc-for list="{{ dayRows }}" as="d" hint-placeholder-count="10">
+                <div style="display:grid;grid-template-columns:44px 1fr 32px;align-items:center;gap:10px;border-bottom:1px solid var(--line);border-left:2px solid {{ d.edge }};padding:3px 0 3px 8px;background:{{ d.rowBg }}">
+                  <span style="display:flex;flex-direction:column;line-height:1">
+                    <span style="font-family:Doto,Archivo,sans-serif;font-weight:900;font-size:19px;color:{{ d.numColor }}">{{ d.nn }}</span>
+                    <span style="font-size:8.5px;letter-spacing:.18em;color:var(--dim);margin-top:3px">{{ d.dow }}</span>
+                  </span>
+                  <input value="{{ d.text }}" onInput="{{ d.onText }}" disabled="{{ d.locked }}" placeholder="{{ d.placeholder }}" style="width:100%;background:transparent;border:0;color:var(--ink);font-size:14px;padding:11px 2px;outline:none">
+                  <button onClick="{{ d.onFav }}" disabled="{{ d.locked }}" aria-label="favorite" style="width:28px;height:28px;display:grid;place-items:center;background:transparent;border:1px solid {{ d.favBorder }};color:{{ d.favColor }};cursor:pointer">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="{{ d.favFill }}" stroke="currentColor" stroke-width="2"><path d="M12 3l2.7 5.8 6.3.8-4.6 4.4 1.2 6.2L12 17.7 6.4 20.2l1.2-6.2L3 9.6l6.3-.8z"></path></svg>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:24px;border:1px solid var(--hard);padding:16px;background:var(--surf)">
+              <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:10px">{{ t.monthThought }}</div>
+              <textarea value="{{ monthNote }}" onInput="{{ onMonthNote }}" disabled="{{ monthNoteLocked }}" placeholder="{{ monthNotePlaceholder }}" rows="4" style="width:100%;background:transparent;border:0;border-top:1px solid var(--line);color:var(--ink);font-size:14px;line-height:1.65;padding:12px 0 0;outline:none;resize:vertical"></textarea>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isChecklist }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:5px;margin-bottom:14px">
+              <h2 style="margin:0;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);text-align:center">{{ t.checklist }}</h2>
+              <span style="font-size:9.5px;color:var(--red);letter-spacing:.18em;text-transform:uppercase;text-align:center">{{ t.tapHint }}</span>
+            </div>
+            <div style="border:1px solid var(--hard);background:var(--surf)">
+              <div style="display:flex;gap:2px;padding:9px 10px 7px;border-bottom:1px solid var(--line)">
+                <sc-for list="{{ axisDays }}" as="a" hint-placeholder-count="10">
+                  <span style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;font-family:Doto,Archivo,sans-serif;font-size:8.5px;font-weight:800;line-height:1;color:{{ a.color }}">
+                    <span style="display:block">{{ a.top }}</span>
+                    <span style="display:block">{{ a.bot }}</span>
+                    <span style="display:block;width:1px;height:3px;background:{{ a.tick }};margin-top:1px"></span>
+                  </span>
+                </sc-for>
+              </div>
+              <sc-for list="{{ rows }}" as="row" hint-placeholder-count="8">
+                <div style="padding:10px 10px 12px;border-bottom:1px solid var(--line)">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px">
+                    <div style="display:flex;align-items:center;gap:8px;min-width:0">
+                      <span style="font-family:Doto,Archivo,sans-serif;font-size:11px;font-weight:900;color:var(--red);flex:none">{{ row.num }}</span>
+                      <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.name }}</span>
+                      <span style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);flex:none">{{ row.streakLabel }}</span>
+                    </div>
+                    <span style="font-family:Doto,Archivo,sans-serif;font-size:12px;font-weight:800;color:var(--dim);white-space:nowrap;flex:none">{{ row.score }}</span>
+                  </div>
+                  <div style="display:flex;gap:2px">
+                    <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="10">
+                      <button onClick="{{ c.onClick }}" aria-label="{{ c.aria }}" style="flex:1 1 0;min-width:0;aspect-ratio:1;max-height:26px;padding:0;background:{{ c.bg }};border:1px solid {{ c.bd }};cursor:{{ c.cursor }}"></button>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isPoints }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:14px">
+              <h2 style="margin:0;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);text-align:center">{{ t.points }}</h2>
+              <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;justify-content:center">
+                <span style="font-family:Doto,Archivo,sans-serif;font-size:26px;font-weight:900">{{ monthTotalLabel }}</span>
+                <span style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--red)">{{ monthPctLabel }}</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;border:1px solid var(--hard);background:var(--surf);padding:12px 10px 10px">
+              <div style="flex:none;width:16px;height:190px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end">
+                <sc-for list="{{ yAxis }}" as="v" hint-placeholder-count="9">
+                  <span style="font-family:Doto,Archivo,sans-serif;font-size:9px;font-weight:800;color:var(--dim);line-height:1">{{ v }}</span>
+                </sc-for>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="position:relative;height:190px;border-left:1px solid var(--line)">
+                  <sc-for list="{{ gridLines }}" as="g" hint-placeholder-count="9">
+                    <span style="position:absolute;left:0;right:0;top:{{ g.top }}%;height:0;border-top:1px {{ g.style }} var(--line)"></span>
+                  </sc-for>
+                  <div style="position:absolute;inset:0;display:flex;gap:2px;align-items:flex-end">
+                    <sc-for list="{{ pointsBars }}" as="b" hint-placeholder-count="10">
+                      <span style="flex:1 1 0;min-width:0;height:{{ b.pct }}%;background:{{ b.fill }};display:block"></span>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="display:flex;gap:2px;padding-top:7px">
+                  <sc-for list="{{ axisDays }}" as="a" hint-placeholder-count="10">
+                    <span style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;font-family:Doto,Archivo,sans-serif;font-size:8.5px;font-weight:800;line-height:1;color:{{ a.color }}">
+                      <span style="display:block;width:1px;height:3px;background:{{ a.tick }};margin-bottom:1px"></span>
+                      <span style="display:block">{{ a.top }}</span>
+                      <span style="display:block">{{ a.bot }}</span>
+                    </span>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isScore }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-glow="1" style="display:grid;place-items:center;border:1px solid var(--hard);padding:20px 14px 24px;background:var(--surf);position:relative">
+              <span style="position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--red);border-left:2px solid var(--red)"></span>
+              <span style="position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--red);border-right:2px solid var(--red)"></span>
+              <img src="{{ monthBadge.src }}" alt="" style="width:100%;max-width:230px;aspect-ratio:1;border-radius:50%;object-fit:cover;display:block;border:1px solid var(--line)">
+              <div style="display:flex;align-items:flex-end;gap:14px;margin-top:6px">
+                <div style="font-family:Doto,Archivo,sans-serif;font-weight:900;font-size:62px;line-height:.9">{{ monthBadge.rank }}</div>
+                <div style="display:flex;flex-direction:column;gap:5px;padding-bottom:8px">
+                  <span style="width:36px;height:3px;background:var(--red)"></span>
+                  <span style="font-family:Doto,Archivo,sans-serif;font-size:16px;font-weight:800">{{ monthTotalLabel }}</span>
+                  <span style="font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)">{{ monthPctLabel }}</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:20px;display:flex;flex-direction:column">
+              <sc-for list="{{ habitScores }}" as="h" hint-placeholder-count="8">
+                <div style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:13px 8px;border-bottom:1px solid var(--line);border-left:2px solid {{ h.edge }};background:{{ h.bg }}">
+                  <span style="font-family:Doto,Archivo,sans-serif;font-size:11px;font-weight:900;color:var(--dim)">{{ h.num }}</span>
+                  <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                    <span style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                      <span style="font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:{{ h.fg }}">{{ h.name }}</span>
+                      <span style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red)">{{ h.streakLabel }}</span>
+                    </span>
+                    <span style="height:3px;background:var(--line);width:100%;display:block;position:relative">
+                      <span style="position:absolute;left:0;top:0;bottom:0;width:{{ h.pct }}%;background:{{ h.barColor }}"></span>
+                    </span>
+                  </span>
+                  <span style="font-family:Doto,Archivo,sans-serif;font-size:14px;font-weight:800;color:{{ h.fg }};white-space:nowrap">{{ h.score }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDestacados }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex;gap:6px;padding:16px 0 12px;flex-wrap:wrap">
+          <sc-for list="{{ favModes }}" as="f" hint-placeholder-count="2">
+            <button onClick="{{ f.go }}" style="padding:11px 20px;background:{{ f.bg }};color:{{ f.fg }};border:1px solid var(--hard);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ f.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ favYearMode }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:6px;padding:0 0 18px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:18px">
+            <sc-for list="{{ favYearOptions }}" as="y" hint-placeholder-count="3">
+              <button onClick="{{ y.go }}" style="padding:9px 16px;background:{{ y.bg }};color:{{ y.fg }};border:1px solid var(--line);cursor:pointer;font-family:Doto,Archivo,sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em">{{ y.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ hasFavs }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ favList }}" as="f" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:start;padding:16px 2px;border-bottom:1px solid var(--line)">
+                <span style="display:flex;flex-direction:column;gap:4px">
+                  <span style="font-family:Doto,Archivo,sans-serif;font-size:18px;font-weight:900;color:var(--red)">{{ f.date }}</span>
+                  <span style="font-size:8.5px;letter-spacing:.2em;color:var(--dim)">{{ f.year }}</span>
+                </span>
+                <span style="font-size:14.5px;line-height:1.6;text-wrap:pretty">{{ f.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noFavs }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:13px;color:var(--dim);line-height:1.75;max-width:44ch">{{ t.noFavs }}</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isPrincipios }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <p style="font-size:13px;line-height:1.8;color:var(--dim);max-width:56ch;margin:18px auto 30px;text-align:center">{{ t.principlesIntro }}</p>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <sc-for list="{{ principles }}" as="p" hint-placeholder-count="8">
+            <article style="border-top:1px solid var(--hard);padding:22px 0 28px;position:relative">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                <span style="font-family:Doto,Archivo,sans-serif;font-size:34px;font-weight:900;line-height:1;color:var(--red)">{{ p.num }}</span>
+                <svg viewBox="0 0 48 48" style="width:38px;height:38px;flex:none" fill="none" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="miter">
+                  <sc-for list="{{ p.sym }}" as="d" hint-placeholder-count="2">
+                    <path d="{{ d }}"></path>
+                  </sc-for>
+                </svg>
+                <span style="flex:1;height:1px;background:var(--line)"></span>
+                <span style="font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);white-space:nowrap">{{ p.habit }}</span>
+              </div>
+              <sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+                <textarea value="{{ p.raw }}" onInput="{{ p.onEdit }}" rows="{{ p.rows }}" style="width:100%;background:var(--surf);border:1px solid var(--line);color:var(--ink);font-size:13px;line-height:1.7;padding:12px;outline:none;resize:vertical"></textarea>
+              </sc-if>
+              <sc-if value="{{ notEditing }}" hint-placeholder-val="{{ true }}">
+                <div>
+                  <h3 style="margin:0 0 16px;font-size:23px;font-weight:800;line-height:1.22;letter-spacing:-.01em;text-wrap:pretty;max-width:38ch">{{ p.title }}</h3>
+                  <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px 26px">
+                    <sc-for list="{{ p.bullets }}" as="b" hint-placeholder-count="4">
+                      <li style="display:grid;grid-template-columns:18px 1fr;gap:6px;font-size:13px;line-height:1.6;color:var(--ink);border-left:1px solid var(--line);padding-left:10px">
+                        <span style="color:var(--red);font-family:Doto,Archivo,sans-serif;font-weight:900;font-size:11px">{{ b.i }}</span>
+                        <span style="text-wrap:pretty">{{ b.text }}</span>
+                      </li>
+                    </sc-for>
+                  </ul>
+                </div>
+              </sc-if>
+            </article>
+          </sc-for>
+        </div>
+
+        <section style="border-top:1px solid var(--hard);border-bottom:1px solid var(--hard);padding:26px 0;margin-top:8px">
+          <h2 style="margin:0 0 8px;font-size:24px;font-weight:800;letter-spacing:-.01em;text-align:center">{{ t.neverForget }}</h2>
+          <div style="font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);margin-bottom:18px;text-align:center">{{ t.neverForgetSub }}</div>
+          <div style="display:flex;flex-direction:column;gap:0;margin-bottom:18px">
+            <sc-for list="{{ neverList }}" as="n" hint-placeholder-count="2">
+              <div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:13px 0;border-bottom:1px solid var(--line)">
+                <span style="font-family:Doto,Archivo,sans-serif;font-size:10px;font-weight:900;color:var(--red);padding-top:4px">{{ n.at }}</span>
+                <span style="font-size:14px;line-height:1.65;text-wrap:pretty">{{ n.text }}</span>
+                <button onClick="{{ n.onDel }}" style="background:transparent;border:1px solid var(--line);color:var(--dim);cursor:pointer;width:26px;height:26px;flex:none" style-hover="border-color:var(--red);color:var(--red)">×</button>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+            <textarea value="{{ nfDraft }}" onInput="{{ onNfDraft }}" rows="2" placeholder="{{ t.nfPlaceholder }}" style="flex:1;min-width:220px;background:var(--surf);border:1px solid var(--line);color:var(--ink);font-size:14px;line-height:1.6;padding:11px;outline:none;resize:vertical"></textarea>
+            <button onClick="{{ addNever }}" style="padding:13px 22px;background:var(--red);color:#fff;border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;text-align:left" style-hover="background:#ae1800">{{ t.accept }}</button>
+          </div>
+        </section>
+
+        <button onClick="{{ toggleEdit }}" style="margin-top:24px;padding:14px 22px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;text-align:left" style-hover="background:var(--ink);color:var(--paper)">{{ editLabel }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isMeditacion }}" hint-placeholder-val="{{ false }}">
+      <div style="padding-top:20px">
+        <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:10px">{{ t.pick }}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:6px;margin-bottom:34px">
+          <sc-for list="{{ durations }}" as="d" hint-placeholder-count="9">
+            <button onClick="{{ d.go }}" disabled="{{ d.disabled }}" style="padding:16px 4px;background:{{ d.bg }};color:{{ d.fg }};border:1px solid {{ d.bd }};cursor:pointer;font-family:Doto,Archivo,sans-serif;font-size:16px;font-weight:900;letter-spacing:.04em">{{ d.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:grid;place-items:center;gap:22px">
+          <button onClick="{{ clockClick }}" data-glow="1" style="position:relative;width:272px;height:272px;background:transparent;border:0;cursor:pointer;padding:0;display:grid;place-items:center;border-radius:50%">
+            <svg viewBox="0 0 200 200" style="position:absolute;inset:0;width:100%;height:100%">
+              <circle cx="100" cy="100" r="94" fill="none" stroke="var(--line)" stroke-width="1"></circle>
+              <circle cx="100" cy="100" r="84" fill="none" stroke="var(--line)" stroke-width="6" stroke-dasharray="1 5"></circle>
+              <circle cx="100" cy="100" r="84" fill="none" stroke="var(--red)" stroke-width="6" stroke-dasharray="{{ med.dash }}" transform="rotate(-90 100 100)"></circle>
+              <line x1="100" y1="4" x2="100" y2="18" stroke="var(--ink)" stroke-width="2"></line>
+              <line x1="100" y1="182" x2="100" y2="196" stroke="var(--ink)" stroke-width="2"></line>
+              <line x1="4" y1="100" x2="18" y2="100" stroke="var(--ink)" stroke-width="2"></line>
+              <line x1="182" y1="100" x2="196" y2="100" stroke="var(--ink)" stroke-width="2"></line>
+              <line x1="100" y1="100" x2="{{ med.handX }}" y2="{{ med.handY }}" stroke="var(--red)" stroke-width="2" opacity="{{ med.handOp }}"></line>
+            </svg>
+            <span style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px">
+              <span style="font-family:Doto,Archivo,sans-serif;font-size:48px;font-weight:900;color:var(--ink);letter-spacing:.03em">{{ med.clock }}</span>
+              <span style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red)">{{ med.hint }}</span>
+            </span>
+          </button>
+          <sc-if value="{{ med.running }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ stopMed }}" style="padding:13px 26px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ t.stop }}</button>
+          </sc-if>
+          <sc-if value="{{ noMusic }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:11px;color:var(--dim);text-align:center;max-width:34ch;line-height:1.7;letter-spacing:.08em">{{ t.noMusic }}</p>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDeseos }}" hint-placeholder-val="{{ false }}">
+      <div style="padding-top:18px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin:0 auto 26px;max-width:56ch;text-align:center">
+          <span style="width:26px;height:2px;background:var(--red)"></span>
+          <blockquote style="margin:0;padding:0;font-size:14.5px;line-height:1.8;text-wrap:pretty;overflow-wrap:anywhere">{{ t.wishLegend }}</blockquote>
+          <span style="width:26px;height:2px;background:var(--red)"></span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+          <div style="display:flex;gap:0;border:1px solid var(--hard)">
+            <sc-for list="{{ wishFilters }}" as="f" hint-placeholder-count="3">
+              <button onClick="{{ f.go }}" style="padding:11px 14px;background:{{ f.bg }};color:{{ f.fg }};border:0;border-right:1px solid var(--line);cursor:pointer;font-size:9.5px;letter-spacing:.18em;font-weight:800;text-transform:uppercase;white-space:nowrap">{{ f.label }}</button>
+            </sc-for>
+          </div>
+          <button onClick="{{ openWishModal }}" style="display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--red);color:#fff;border:0;cursor:pointer;font-size:10.5px;letter-spacing:.24em;font-weight:800;text-transform:uppercase;margin-left:auto" style-hover="background:#ae1800">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 5v14M5 12h14"></path></svg>
+            <span>{{ t.add }}</span>
+          </button>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ wishes }}" as="w" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:26px minmax(0,1fr) 28px;gap:10px;align-items:start;padding:16px 2px;border-bottom:1px solid var(--line)">
+              <button onClick="{{ w.onToggle }}" style="width:24px;height:24px;background:{{ w.boxBg }};border:1px solid {{ w.boxBorder }};cursor:pointer;display:grid;place-items:center;color:#fff;margin-top:2px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" opacity="{{ w.checkOpacity }}"><path d="M5 13l4 4 10-11"></path></svg>
+              </button>
+              <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+                <span style="font-size:16px;font-weight:700;line-height:1.35;text-decoration:{{ w.deco }};color:{{ w.fg }};text-wrap:pretty;overflow-wrap:anywhere">{{ w.title }}</span>
+                <span style="font-size:13px;line-height:1.6;color:var(--dim);text-wrap:pretty;overflow-wrap:anywhere">{{ w.desc }}</span>
+              </span>
+              <button onClick="{{ w.onDel }}" style="background:transparent;border:1px solid var(--line);color:var(--dim);cursor:pointer;width:26px;height:26px" style-hover="border-color:var(--red);color:var(--red)">×</button>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ noWishes }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:13px;color:var(--dim);line-height:1.7;max-width:40ch">{{ t.noWishes }}</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <sc-if value="{{ settingsOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;z-index:40">
+      <div style="width:100%;max-width:560px;max-height:92vh;overflow:auto;background:var(--paper);color:var(--ink);border-top:2px solid var(--red);padding:20px 18px 34px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <h2 style="margin:0;font-size:16px;font-weight:800;letter-spacing:.18em;text-transform:uppercase">{{ t.settings }}</h2>
+          <button onClick="{{ closeSettings }}" style="width:32px;height:32px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:15px">×</button>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding:18px 0">
+          <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:10px">{{ t.appearance }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--hard)">
+            <sc-for list="{{ themeOptions }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.go }}" style="padding:13px 6px;background:{{ o.bg }};color:{{ o.fg }};border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding:18px 0">
+          <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:10px">{{ t.language }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--hard)">
+            <sc-for list="{{ langOptions }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.go }}" style="padding:13px 6px;background:{{ o.bg }};color:{{ o.fg }};border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--line);padding:18px 0">
+          <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:10px">{{ t.music }}</div>
+          <div style="font-size:13px;margin-bottom:12px">{{ musicLabel }}</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <label style="padding:12px 20px;background:var(--ink);color:var(--paper);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">
+              {{ t.uploadMusic }}
+              <input type="file" accept="audio/*" onChange="{{ onMusicFile }}" style="display:none">
+            </label>
+            <sc-if value="{{ hasMusic }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ clearMusic }}" style="padding:12px 18px;background:transparent;border:1px solid var(--line);color:var(--dim);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase" style-hover="border-color:var(--red);color:var(--red)">{{ t.remove }}</button>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0">
+          <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:10px">{{ t.data }}</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button onClick="{{ exportData }}" style="padding:12px 20px;background:var(--red);color:#fff;border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;text-align:left" style-hover="background:#ae1800">{{ t.export }}</button>
+            <label style="padding:12px 20px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">
+              {{ t.import }}
+              <input type="file" accept="application/json,.json" onChange="{{ onImportFile }}" style="display:none">
+            </label>
+          </div>
+          <div style="font-size:11px;color:var(--dim);margin-top:12px">{{ statusMsg }}</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ wishModal }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,.66);display:flex;align-items:flex-end;justify-content:center;z-index:45;padding:0">
+      <div style="width:100%;max-width:520px;background:var(--paper);color:var(--ink);border-top:2px solid var(--red);padding:22px 20px 30px;position:relative">
+        <span style="position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--red);border-left:2px solid var(--red)"></span>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--red)">{{ t.newWish }}</div>
+          <button onClick="{{ closeWishModal }}" style="width:30px;height:30px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:15px">×</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)">{{ t.wishTitleLabel }}</span>
+            <input value="{{ wishDraft }}" onInput="{{ onWishDraft }}" placeholder="{{ t.wishPlaceholder }}" style="width:100%;background:transparent;border:0;border-bottom:1px solid var(--hard);color:var(--ink);font-size:18px;font-weight:700;padding:9px 2px;outline:none">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)">{{ t.wishDescLabel }}</span>
+            <textarea value="{{ wishDesc }}" onInput="{{ onWishDesc }}" rows="4" placeholder="{{ t.wishDescPlaceholder }}" style="width:100%;background:var(--surf);border:1px solid var(--line);color:var(--ink);font-size:14px;line-height:1.65;padding:11px;outline:none;resize:vertical"></textarea>
+          </label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button onClick="{{ addWish }}" style="padding:14px 26px;background:var(--red);color:#fff;border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;text-align:left" style-hover="background:#ae1800">{{ t.accept }}</button>
+            <button onClick="{{ closeWishModal }}" style="padding:14px 20px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ t.cancel }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ medAsk }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,.68);display:grid;place-items:center;z-index:50;padding:20px">
+      <div style="width:100%;max-width:400px;background:var(--paper);color:var(--ink);border:1px solid var(--red);padding:26px 22px">
+        <div style="font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:12px">{{ t.beforeStart }}</div>
+        <h3 style="margin:0 0 12px;font-size:21px;font-weight:800;line-height:1.3">{{ t.silence }}</h3>
+        <p style="margin:0 0 22px;font-size:13.5px;line-height:1.7;color:var(--dim)">{{ t.silenceBody }}</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button onClick="{{ medReady }}" style="padding:13px 24px;background:var(--red);color:#fff;border:0;cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase;text-align:left" style-hover="background:#ae1800">{{ t.ready }}</button>
+          <button onClick="{{ medCancel }}" style="padding:13px 20px;background:transparent;border:1px solid var(--hard);color:var(--ink);cursor:pointer;font-size:10px;letter-spacing:.22em;font-weight:800;text-transform:uppercase">{{ t.cancel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;'es' | 'en'&quot;,&quot;section&quot;:&quot;Defaults&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;paper&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;paper&quot;,&quot;tsType&quot;:&quot;'paper' | 'dark'&quot;,&quot;section&quot;:&quot;Defaults&quot;}}">
+const KEY = 'jabs-habit-tracker-v1';
+
+const HABITS = [
+  { k: 'meditation', en: 'Meditation', es: 'Meditación' },
+  { k: 'reading', en: 'Reading & Learning', es: 'Lectura y aprendizaje' },
+  { k: 'exercise', en: 'Exercise', es: 'Ejercicio' },
+  { k: 'investment', en: 'Investment', es: 'Inversión' },
+  { k: 'projects', en: 'Proyects', es: 'Proyectos' },
+  { k: 'family', en: 'Family', es: 'Familia' },
+  { k: 'contribute', en: 'Contribute', es: 'Contribuir' },
+  { k: 'gratitude', en: 'Gratitude', es: 'Gratitud' }
+];
+
+const PRINCIPLES = [
+  'Honro mi símbolo con el fuego de mi espíritu.\n- Es el mantra más poderoso y eficaz.\n- Me ayuda a ser fiel a mi "ultimate version".\n- Me aterriza en el aquí y ahora.\n- Empodera mi fuego interno.\n- Reconecta con mi guía Quetzalcóatl.\n- Recupero control y genero confianza interna.',
+  'Domino la elocuencia y el pensamiento.\n- Facilidad de palabra.\n- Enriquecimiento de léxico.\n- Mejora en las lenguas que domino.\n- Conecta con mi yo más sabio.\n- Escucho mucho y hablo poco, pero con gran fuerza.\n- Analizo con facilidad y actúo con precisión.\n- Refino mis movimientos y genero confianza externa.',
+  'La grandeza de mi cuerpo refleja disciplina, fuerza y gracia.\n- Superó límites físicos.\n- Entreno con pasión y dedicación.\n- Genero inspiración.\n- Disfruto de excelente salud.\n- Me siento cómodo con mi estado y apariencia física.\n- Reconozco mi grandeza.',
+  'Construyo con estrategia libertad plena y estable.\n- Soy un trader rentable gracias a mi disciplina y consistencia.\n- Sé cuándo operar y cuándo retirarme.\n- Soy experto en cuidar mi dinero y hacerlo crecer.\n- Mis metas financieras se cumplen.\n- Disfruto de libertad financiera.\n- El dinero no tiene poder sobre mí.\n- No persigo dinero; el dinero viene a mí.\n- Mis negocios tienen éxito.\n- El dinero trabaja para mí y se incrementa.\n- Disfruto de la sensación de "tener suficiente" para el estilo de vida que merezco.',
+  'Mi legado trasciende y enriquece vidas.\n- Trabajo en mis sueños y ellos impactan vidas.\n- Soy un reconocido desarrollador de videojuegos.\n- Mi estudio Quetzal-Studios desarrolla videojuegos que marcan personas y trascienden de manera cultural.\n- Desarrollamos mundos, historias y experiencias únicas y de gran resonancia cultural.\n- Desarrollé mi mejor obra llamada "Sons of Earth", juego que tuvo adaptación al mundo del entretenimiento audiovisual y el personaje principal fue invitado como personaje jugable en Smash Bros.\n- Somos un estudio privado que trabaja sin presiones, somos totalmente autosuficientes y apasionados.',
+  'Soy presencia, amor y protección para mi familia.\n- Estoy en preparado para proteger a mi familia en cualquier ámbito.\n- Soy capaz de trabajar y estar con mi familia la mayoría del tiempo.\n- Demuestro amor siempre a mi familia.\n- Soy un referente de cómo debe ser sentirse "amada", mi hija dándole el ejemplo con su madre.\n- Nuestra familia es sólida, llena de amor, seguridad y compromiso.\n- No hay nada en esta vida que entorpezca el crecimiento de mi familia.\n- Nada puede separar a esta familia.\n- Apoyo los sueños de mi hija y de mi esposa, hasta verlos realizados.\n- Todo sacrificio realizado con el fin de favorecer a mi familia da muchos frutos.\n- La familia prospera de manera abundante.\n- El amor que tengo por mi hija y mi esposa puede con cualquier otra circunstancia.',
+  'Desde la gratitud, contribuyo al crecimiento de los míos.\n- Todos aquellos que nos apoyaron cuando más lo necesitamos reciben nuestro apoyo incondicional.\n- Duplicamos el valor y apoyo que nos dieron al apoyarnos, siempre todo desde la gratitud.\n- Amor recíproco para aquellos que nos aman de vuelta sin malas intenciones.',
+  'Prospero con gratitud, paciencia y equilibrio.\n- Mis esfuerzos y avances suman todos los días, independientemente del tamaño de los mismos.\n- Cada día que pasa es un día más cerca de ser mi "ultimate" me.\n- Agradezco cada avance, enseñanza, victoria, fallo y aprendizaje que se presenta en mi camino.\n- Mi proceso es único, lleno de aprendizaje y enriquece mi vida.\n- En mi vida, el equilibrio es parte esencial.\n- Actúo con paciencia y siempre a expectativa.\n- Controlo mis emociones, por lo que es sencillo mantener paciencia en todo momento.\n- Soy muy agradecido con la vida.\n- Mi fortuna y libertad son producto de mi paciencia.'
+];
+
+const LEGEND = 'Recuerda: no hace falta sacrificar ni pedir. No lo mires desde la carencia. No hay requisitos, no hay que esforzarse por merecerlo. Ya son tuyos, porque ya lo tienes todo. Siéntelo, tómalo y vibra en esa frecuencia.';
+const LEGEND_EN = 'Remember: there is nothing to sacrifice and nothing to ask for. Do not look at this from lack. There are no requirements, no effort to prove. They are already yours, because you already have it all. Feel it, take it and vibrate at that frequency.';
+
+const STR = {
+  es: {
+    menu: 'Menú principal', registros: 'Registros', destacados: 'Destacados', principios: 'Principios',
+    meditacion: 'Meditación', deseos: 'Deseos', settings: 'Ajustes',
+    subRegistros: 'Highlights · check-list · points · score', subDestacados: 'Tus días favoritos',
+    subPrincipios: 'Los 8 mantras', subMeditacion: 'Temporizador y música', subDeseos: 'Metas por cumplir',
+    generalScore: 'Score general', dailyHighlights: 'Daily highlights', checklist: 'Check-list',
+    points: 'Points', score: 'Score', highlights: 'Highlights',
+    tapHint: 'Toca para marcar Y / N',
+    monthThought: 'Pensamiento del mes', monthNotePlaceholder: 'Se desbloquea el último día del mes',
+    monthNoteOpen: 'Escribe tu comentario sobre el mes vivido',
+    dayPlaceholder: 'Lo más destacado del día', lockedPlaceholder: 'Bloqueado',
+    favs: 'destacados', noFavs: 'Aún no hay días destacados. Marca un día con la estrella en Daily highlights.',
+    all: 'General', byYear: 'Año',
+    principlesIntro: 'Ocho principios, ocho hábitos. Cada mantra sostiene un registro diario del check-list.',
+    neverForget: 'Never forget...', neverForgetSub: 'Notas que no se negocian',
+    nfPlaceholder: 'Algo que nunca debo olvidar…', accept: 'Aceptar', edit: 'Editar contenido', done: 'Listo',
+    stop: 'Detener', noMusic: 'No hay música cargada. Súbela en Ajustes › Música.',
+    start: 'Iniciar', running: 'En sesión', pick: 'Elige tu tiempo',
+    beforeStart: 'Antes de empezar', silence: 'Silencia tus notificaciones',
+    silenceBody: 'Pon el dispositivo en no molestar. Al dar Listo empieza la cuenta regresiva y la música en loop.',
+    ready: 'Listo', cancel: 'Cancelar',
+    appearance: 'Apariencia', language: 'Lenguaje', music: 'Música', data: 'Datos',
+    paper: 'Paper', dark: 'Oscuro', export: 'Exportar datos', import: 'Importar datos',
+    uploadMusic: 'Subir canción', remove: 'Quitar', noMusicSet: 'Sin canción seleccionada',
+    add: 'Agregar deseo', newWish: 'Nuevo deseo', wishPlaceholder: 'Título del deseo o meta',
+    badgesEarned: 'Insignias obtenidas', wishTitleLabel: 'Título', wishDescLabel: 'Descripción',
+    wishDescPlaceholder: 'Descripción: cómo se ve, cómo se siente…',
+    wishLegend: LEGEND, noWishes: 'Sin deseos registrados todavía.',
+    fAll: 'Todos', fOpen: 'Por cumplir', fDone: 'Cumplidos',
+    streak: 'Racha', pts: 'pts',
+    months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthsShort: ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+    dows: ['D','L','M','M','J','V','S']
+  },
+  en: {
+    menu: 'Main menu', registros: 'Records', destacados: 'Featured', principios: 'Principles',
+    meditacion: 'Meditation', deseos: 'Wishes', settings: 'Settings',
+    subRegistros: 'Highlights · check-list · points · score', subDestacados: 'Your favorite days',
+    subPrincipios: 'The 8 mantras', subMeditacion: 'Timer and music', subDeseos: 'Goals to fulfill',
+    generalScore: 'General score', dailyHighlights: 'Daily highlights', checklist: 'Check-list',
+    points: 'Points', score: 'Score', highlights: 'Highlights',
+    tapHint: 'Tap to mark Y / N',
+    monthThought: 'Thought of the month', monthNotePlaceholder: 'Unlocks on the last day of the month',
+    monthNoteOpen: 'Write your comment about the month you lived',
+    dayPlaceholder: "The day's highlight", lockedPlaceholder: 'Locked',
+    favs: 'featured', noFavs: 'No featured days yet. Star a day in Daily highlights.',
+    all: 'All time', byYear: 'Year',
+    principlesIntro: 'Eight principles, eight habits. Each mantra holds one daily check-list record.',
+    neverForget: 'Never forget...', neverForgetSub: 'Non-negotiable notes',
+    nfPlaceholder: 'Something I must never forget…', accept: 'Accept', edit: 'Edit content', done: 'Done',
+    stop: 'Stop', noMusic: 'No music loaded. Upload it in Settings › Music.',
+    start: 'Start', running: 'In session', pick: 'Pick your time',
+    beforeStart: 'Before you start', silence: 'Silence your notifications',
+    silenceBody: 'Set the device to do-not-disturb. Tapping Ready starts the countdown and the looping music.',
+    ready: 'Ready', cancel: 'Cancel',
+    appearance: 'Appearance', language: 'Language', music: 'Music', data: 'Data',
+    paper: 'Paper', dark: 'Dark', export: 'Export data', import: 'Import data',
+    uploadMusic: 'Upload song', remove: 'Remove', noMusicSet: 'No song selected',
+    add: 'Add wish', newWish: 'New wish', wishPlaceholder: 'Title of the wish or goal',
+    badgesEarned: 'Badges earned', wishTitleLabel: 'Title', wishDescLabel: 'Description',
+    wishDescPlaceholder: 'Description: how it looks, how it feels…',
+    wishLegend: LEGEND_EN, noWishes: 'No wishes recorded yet.',
+    fAll: 'All', fOpen: 'To fulfill', fDone: 'Fulfilled',
+    streak: 'Streak', pts: 'pts',
+    months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    monthsShort: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
+    dows: ['S','M','T','W','T','F','S']
+  }
+};
+
+const pad = (n) => (n < 10 ? '0' + n : '' + n);
+const dim = (y, m) => new Date(y, m + 1, 0).getDate();
+const r1 = (v) => Math.round(v * 10) / 10;
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const now = new Date();
+    const saved = this.load();
+    this.state = {
+      screen: 'menu', tab: 'highlights', settingsOpen: false, monthPicker: false,
+      editing: false, nfDraft: '', wishDraft: '', wishDesc: '',
+      favMode: 'all', favYear: now.getFullYear(), status: '', anim: '0', wishModal: false,
+      med: { dur: 10, left: 0, running: false, ask: false, prevTheme: null },
+      year: now.getFullYear(), month: now.getMonth(),
+      lang: saved.lang || (props.defaultLang || 'es'),
+      theme: saved.theme || (props.defaultTheme || 'paper'),
+      data: saved.data
+    };
+    this.tick = null;
+  }
+
+  load() {
+    let raw = null;
+    try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { raw = null; }
+    const d = (raw && raw.data) || {};
+    const wishes = (d.wishes || []).map((w) => ({ title: w.title || w.text || '', desc: w.desc || '', done: !!w.done }));
+    return {
+      lang: raw && raw.lang, theme: raw && raw.theme,
+      data: {
+        days: d.days || {}, notes: d.notes || {}, wishes: wishes, never: d.never || [],
+        principles: d.principles || PRINCIPLES.slice(), music: d.music || null
+      }
+    };
+  }
+
+  persist() {
+    const s = this.state;
+    try { localStorage.setItem(KEY, JSON.stringify({ lang: s.lang, theme: s.theme, data: s.data })); return true; }
+    catch (e) { return false; }
+  }
+
+  setData(fn, extra) {
+    this.setState((s) => {
+      const data = fn(JSON.parse(JSON.stringify(s.data)));
+      setTimeout(() => this.persist(), 0);
+      return Object.assign({ data: data }, extra || {});
+    });
+  }
+
+  componentWillUnmount() { if (this.tick) clearInterval(this.tick); this.stopAudio(); }
+
+  todayKey() { const n = new Date(); return n.getFullYear() + '-' + pad(n.getMonth() + 1) + '-' + pad(n.getDate()); }
+  key(d) { return this.state.year + '-' + pad(this.state.month + 1) + '-' + pad(d); }
+  day(k) { return this.state.data.days[k] || { text: '', fav: false, h: [] }; }
+  isLocked(d) { return this.key(d) > this.todayKey(); }
+
+  monthStats(y, m) {
+    const n = dim(y, m);
+    let total = 0;
+    const per = HABITS.map(() => 0);
+    for (let d = 1; d <= n; d++) {
+      const rec = this.state.data.days[y + '-' + pad(m + 1) + '-' + pad(d)];
+      if (!rec || !rec.h) continue;
+      for (let i = 0; i < 8; i++) if (rec.h[i]) { total++; per[i]++; }
+    }
+    return { total: total, max: n * 8, per: per, days: n };
+  }
+
+  rankFor(pct) {
+    if (pct >= 80) return 'A';
+    if (pct >= 64) return 'B';
+    if (pct >= 48) return 'C';
+    if (pct >= 32) return 'D';
+    return 'E';
+  }
+
+  // Quetzalcóatl rank badge — faceted dragon head + layered plume fan, per rank
+  badge(rank) {
+    const C = {
+      A: { rows: [7, 5, 4], len: 96, sw: 1.4 },
+      B: { rows: [6, 4, 0], len: 88, sw: 1.4 },
+      C: { rows: [5, 3, 0], len: 78, sw: 1.4 },
+      D: { rows: [4, 0, 0], len: 66, sw: 1.4 },
+      E: { rows: [3, 0, 0], len: 56, sw: 1.4 }
+    }[rank];
+    const cx = 146, cy = 104;
+    const lance = (a, L, w, bo, bend) => {
+      const rad = a * Math.PI / 180;
+      const dx = Math.cos(rad), dy = Math.sin(rad);
+      const px = -dy, py = dx;
+      const p = (mx, my) => r1(cx + dx * mx + px * my) + ' ' + r1(cy + dy * mx + py * my);
+      return 'M' + p(bo, 0) + ' L' + p(L * 0.34, w) + ' L' + p(L, bend) + ' L' + p(L * 0.6, -w * 0.5) + 'Z';
+    };
+    const feathers = [];
+    const ROW = [
+      { a0: 298, a1: 206, k: 1, w: 9.5, bo: 4, bend: 8 },
+      { a0: 290, a1: 216, k: 0.72, w: 8, bo: 2, bend: 6 },
+      { a0: 282, a1: 228, k: 0.5, w: 6.5, bo: 0, bend: 5 }
+    ];
+    ROW.forEach((rw, ri) => {
+      const n = C.rows[ri];
+      for (let i = 0; i < n; i++) {
+        const t = n === 1 ? 0.5 : i / (n - 1);
+        const a = rw.a0 - (rw.a0 - rw.a1) * t;
+        const L = C.len * rw.k * (0.8 + 0.2 * Math.sin(Math.PI * (0.2 + 0.7 * t)));
+        const fill = ri === 0
+          ? (i % 3 === 0 ? 'var(--red)' : (i % 3 === 1 ? 'var(--paper)' : 'var(--ink)'))
+          : (i % 2 === 0 ? 'var(--ink)' : 'var(--red)');
+        feathers.push({ d: lance(a, L, rw.w, rw.bo, rw.bend), fill: fill, sw: C.sw });
+      }
+    });
+    const P = [
+      // neck — short crescent, tapered tip
+      ['M 132 130 C 114 142 104 160 107 178 C 109 187 114 193 121 198 C 113 185 114 170 121 157 C 128 144 140 136 152 132 Z', 'var(--paper)', 2.2],
+      // crest spikes off the skull
+      ['M 152 82 L 188 54 L 178 84 Z', 'var(--paper)', 2],
+      ['M 136 90 L 156 62 L 160 86 Z', 'var(--paper)', 2],
+      // brow plate — swept, sits over the eye
+      ['M 126 102 L 156 80 L 196 88 L 212 98 L 172 104 L 140 110 Z', 'var(--paper)', 2.2],
+      // cheek / jaw-hinge facet
+      ['M 128 108 L 158 100 L 172 116 L 152 130 L 130 124 Z', 'var(--paper)', 2.2],
+      // upper jaw / snout with hooked tip
+      ['M 166 102 L 208 99 L 228 111 L 221 121 L 212 114 L 186 116 L 168 112 Z', 'var(--paper)', 2.2],
+      // lower mandible, hinged at the cheek
+      ['M 166 116 L 204 122 L 220 129 L 210 133 L 184 130 L 168 124 Z', 'var(--paper)', 2.2],
+      // fang + facet lines
+      ['M 198 122 L 202 132 L 194 124 Z', 'none', 1.6],
+      ['M 152 118 L 166 108', 'none', 1.6],
+      ['M 190 104 L 198 112', 'none', 1.6]
+    ];
+    const plates = P.map((o) => ({ d: o[0], fill: o[1], sw: o[2] }));
+    return {
+      rank: rank, src: 'assets/insignia/' + rank + '-' + (this.state.theme === 'dark' ? 'dark' : 'light') + '.png',
+      feathers: feathers, plates: plates, sw: 2.2, fill: 'var(--paper)',
+      ring: 'M 92 178 A 82 82 0 1 1 218 142',
+      ring2: 'M 164 38 A 82 82 0 0 1 222 126',
+      eye: 'M 152 107 L 167 103 L 169 108 L 154 111 Z'
+    };
+  }
+
+  badgeOld(rank) {
+    const cfg = {
+      A: { crest: 9, ruff: 5, len: 104, sw: 1.5 },
+      B: { crest: 7, ruff: 4, len: 92, sw: 1.5 },
+      C: { crest: 5, ruff: 3, len: 78, sw: 1.5 },
+      D: { crest: 3, ruff: 2, len: 62, sw: 1.5 },
+      E: { crest: 1, ruff: 0, len: 50, sw: 1.5 }
+    }[rank];
+    const cx = 143, cy = 105;
+    const blade = (a, L, w, bo, bend) => {
+      const rad = a * Math.PI / 180;
+      const dx = Math.cos(rad), dy = Math.sin(rad);
+      const px = -dy, py = dx;
+      const bx = cx + dx * bo, by = cy + dy * bo;
+      const tx = cx + dx * L + px * bend, ty = cy + dy * L + py * bend;
+      const c1x = cx + dx * L * 0.52 + px * (w + bend * 0.4), c1y = cy + dy * L * 0.52 + py * (w + bend * 0.4);
+      const c2x = cx + dx * L * 0.46 - px * (w * 0.68 - bend * 0.35), c2y = cy + dy * L * 0.46 - py * (w * 0.68 - bend * 0.35);
+      return 'M' + r1(bx) + ' ' + r1(by) + ' Q' + r1(c1x) + ' ' + r1(c1y) + ' ' + r1(tx) + ' ' + r1(ty) + ' Q' + r1(c2x) + ' ' + r1(c2y) + ' ' + r1(bx) + ' ' + r1(by) + 'Z';
+    };
+    const paint = (i, n) => {
+      if (rank === 'A' || rank === 'B') return i % 3 === 0 ? 'var(--red)' : (i % 3 === 1 ? 'var(--ink)' : 'var(--paper)');
+      if (rank === 'C') return i >= n - 2 ? 'var(--red)' : (i % 2 === 0 ? 'var(--ink)' : 'var(--paper)');
+      return i === n - 1 ? 'var(--red)' : 'var(--paper)';
+    };
+    const feathers = [];
+    for (let i = 0; i < cfg.crest; i++) {
+      const t = cfg.crest === 1 ? 1 : i / (cfg.crest - 1);
+      const a = 152 + 116 * t;
+      const L = cfg.len * (0.76 + 0.26 * Math.sin(Math.PI * (0.25 + 0.7 * t)));
+      feathers.push({ d: blade(a, L, 8.6, 14, 9), fill: paint(i, cfg.crest), sw: cfg.sw });
+    }
+    for (let i = 0; i < cfg.ruff; i++) {
+      const t = cfg.ruff === 1 ? 0.5 : i / (cfg.ruff - 1);
+      const a = 146 + 46 * t;
+      const L = cfg.len * (0.5 + 0.14 * t);
+      feathers.push({ d: blade(a, L, 6.4, 8, 7), fill: i % 2 === 0 ? 'var(--ink)' : 'var(--paper)', sw: cfg.sw });
+    }
+    return {
+      rank: rank, feathers: feathers, sw: 2.4,
+      fill: 'var(--paper)',
+      ring: 'M 92 178 A 82 82 0 1 1 218 142',
+      ring2: 'M 164 38 A 82 82 0 0 1 222 126',
+      neck: 'M 150 114 C 132 122 118 138 116 158 C 114 177 119 191 124 201 L 136 201 C 130 189 126 174 128 160 C 131 143 145 130 161 124 Z',
+      head: 'M 147 124 C 141 107 152 91 170 88 L 179 63 L 189 87 C 205 91 219 99 229 107 L 205 111 C 190 112 174 114 162 117 L 151 122 Z',
+      jaw: 'M 158 122 C 174 126 194 129 214 131 L 210 135 L 186 134 C 173 132 164 128 156 124 Z',
+      eye: 'M 172 99 C 176 95 182 93 187 94 C 184 99 178 102 172 102 Z'
+    };
+  }
+
+  stopAudio() { if (this.audio) { try { this.audio.pause(); } catch (e) {} this.audio = null; } }
+
+  startMed() {
+    const dur = this.state.med.dur;
+    const wasPaper = this.state.theme === 'paper';
+    const mus = this.state.data.music;
+    if (mus && mus.url) {
+      this.audio = new Audio(mus.url);
+      this.audio.loop = true;
+      this.audio.volume = 0.85;
+      this.audio.play().catch(() => {});
+    }
+    this.setState({ anim: '1', theme: 'dark', med: Object.assign({}, this.state.med, { running: true, ask: false, left: dur * 60, prevTheme: wasPaper ? 'paper' : 'dark' }) });
+    if (this.tick) clearInterval(this.tick);
+    this.tick = setInterval(() => {
+      this.setState((s) => {
+        const left = s.med.left - 1;
+        if (left <= 0) { setTimeout(() => this.endMed(), 0); return { med: Object.assign({}, s.med, { left: 0 }) }; }
+        return { med: Object.assign({}, s.med, { left: left }) };
+      });
+    }, 1000);
+  }
+
+  endMed(cancelled) {
+    if (this.tick) { clearInterval(this.tick); this.tick = null; }
+    this.stopAudio();
+    const back = this.state.med.prevTheme === 'paper' ? 'paper' : 'dark';
+    this.setState({ theme: back, med: Object.assign({}, this.state.med, { running: false, left: 0 }) });
+    setTimeout(() => this.setState({ anim: '0' }), 1600);
+    setTimeout(() => this.persist(), 0);
+    if (!cancelled && navigator.vibrate) { try { navigator.vibrate([400, 150, 400, 150, 600]); } catch (e) {} }
+  }
+
+  exportData() {
+    const payload = JSON.stringify({ lang: this.state.lang, theme: this.state.theme, data: this.state.data }, null, 2);
+    const url = URL.createObjectURL(new Blob([payload], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'becoming-tracker-' + this.todayKey() + '.json';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    this.setState({ status: '✓' });
+  }
+
+  importFile(e) {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => {
+      try {
+        const parsed = JSON.parse(fr.result);
+        const d = parsed.data || parsed;
+        const wishes = (d.wishes || []).map((w) => ({ title: w.title || w.text || '', desc: w.desc || '', done: !!w.done }));
+        this.setState({
+          data: { days: d.days || {}, notes: d.notes || {}, wishes: wishes, never: d.never || [], principles: d.principles || PRINCIPLES.slice(), music: d.music || null },
+          lang: parsed.lang || this.state.lang, theme: parsed.theme || this.state.theme, status: '✓'
+        }, () => this.persist());
+      } catch (err) { this.setState({ status: '✕' }); }
+    };
+    fr.readAsText(f);
+  }
+
+  musicFile(e) {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => {
+      const rec = { name: f.name, url: fr.result };
+      this.setState((s) => ({ data: Object.assign({}, s.data, { music: rec }) }), () => {
+        const ok = this.persist();
+        this.setState({ status: ok ? '✓' : '⚠' });
+      });
+    };
+    fr.readAsDataURL(f);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const t = STR[s.lang];
+    const L = s.lang;
+    const now = new Date();
+    const nDays = dim(s.year, s.month);
+    const stats = this.monthStats(s.year, s.month);
+    const pct = stats.max ? Math.round((stats.total / stats.max) * 100) : 0;
+    const titles = { menu: t.menu, registros: t.registros, destacados: t.destacados, principios: t.principios, meditacion: t.meditacion, deseos: t.deseos };
+    const todayK = this.todayKey();
+
+    const nav = ['registros', 'destacados', 'principios', 'meditacion', 'deseos'];
+    const subs = [t.subRegistros, t.subDestacados, t.subPrincipios, t.subMeditacion, t.subDeseos];
+    const SYM = {
+      registros: ['M 8 10 H 40 M 8 17 H 30', 'M 8 34 L 16 26 L 24 40 L 32 24 L 40 32'],
+      destacados: ['M 24 6 L 30 20 L 44 22 L 33 31 L 37 44 L 24 36 L 11 44 L 15 31 L 4 22 L 18 20 Z'],
+      principios: ['M 24 4 L 40 12 L 44 28 L 34 42 L 14 42 L 4 28 L 8 12 Z', 'M 24 16 L 32 24 L 24 32 L 16 24 Z'],
+      meditacion: ['M 24 4 V 12 M 44 24 H 36 M 24 44 V 36 M 4 24 H 12', 'M 24 12 L 36 24 L 24 36 L 12 24 Z', 'M 24 22 L 26 24 L 24 26 L 22 24 Z'],
+      deseos: ['M 24 4 L 34 26 L 24 20 L 14 26 Z', 'M 24 26 L 30 44 L 24 38 L 18 44 Z']
+    };
+    const tiles = nav.map((k, i) => ({
+      label: titles[k], sub: subs[i], sym: SYM[k],
+      span: k === 'principios' ? 'span 2' : 'auto',
+      minH: k === 'principios' ? 118 : 138,
+      iconSize: k === 'principios' ? 42 : 46,
+      go: () => this.setState({ screen: k, monthPicker: false })
+    }));
+
+    let yTotal = 0, yMax = 0;
+    for (let m = 0; m < 12; m++) {
+      const st = this.monthStats(s.year, m);
+      yTotal += st.total;
+      if (s.year < now.getFullYear()) yMax += st.max;
+      else if (s.year === now.getFullYear() && m < now.getMonth()) yMax += st.max;
+      else if (s.year === now.getFullYear() && m === now.getMonth()) yMax += now.getDate() * 8;
+    }
+    const yPct = yMax ? Math.round((yTotal / yMax) * 100) : 0;
+
+    const tally = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+    for (let m = 0; m < 12; m++) {
+      const st = this.monthStats(s.year, m);
+      if (!st.total) continue;
+      const monthOver = s.year < now.getFullYear() || (s.year === now.getFullYear() && m <= now.getMonth());
+      if (!monthOver) continue;
+      const cap = (s.year === now.getFullYear() && m === now.getMonth()) ? now.getDate() * 8 : st.max;
+      tally[this.rankFor(Math.round((st.total / cap) * 100))]++;
+    }
+    const rankTally = [['A', '80%'], ['B', '64%'], ['C', '48%'], ['D', '32%'], ['E', '16%']].map((o) => ({
+      rank: o[0], threshold: o[1], count: tally[o[0]], threshold2: '',
+      b: this.badge(o[0]), op: tally[o[0]] ? 1 : 0.32,
+      bg: tally[o[0]] ? 'rgba(236,48,19,.09)' : 'transparent',
+      bd: tally[o[0]] ? 'var(--red)' : 'var(--line)',
+      fg: tally[o[0]] ? 'var(--ink)' : 'var(--dim)',
+      countColor: tally[o[0]] ? 'var(--red)' : 'var(--line)'
+    }));
+
+    // highlights rows
+    const dayRows = [];
+    for (let d = 1; d <= nDays; d++) {
+      const k = this.key(d);
+      const rec = this.day(k);
+      const locked = this.isLocked(d);
+      const isToday = k === todayK;
+      dayRows.push({
+        nn: pad(d), dow: t.dows[new Date(s.year, s.month, d).getDay()], text: rec.text || '', locked: locked,
+        placeholder: locked ? t.lockedPlaceholder : t.dayPlaceholder,
+        rowBg: rec.fav ? 'rgba(236,48,19,.10)' : 'transparent',
+        edge: rec.fav ? 'var(--red)' : (isToday ? 'var(--hard)' : 'transparent'),
+        numColor: rec.fav ? 'var(--red)' : (locked ? 'var(--line)' : 'var(--ink)'),
+        favBorder: rec.fav ? 'var(--red)' : 'var(--line)',
+        favColor: rec.fav ? 'var(--red)' : 'var(--dim)',
+        favFill: rec.fav ? 'var(--red)' : 'none',
+        onText: (e) => { const v = e.target.value; this.setData((dd) => { const r = dd.days[k] || { text: '', fav: false, h: [] }; r.text = v; dd.days[k] = r; return dd; }); },
+        onFav: () => this.setData((dd) => { const r = dd.days[k] || { text: '', fav: false, h: [] }; r.fav = !r.fav; dd.days[k] = r; return dd; })
+      });
+    }
+    const favCount = Object.keys(s.data.days).filter((k) => k.indexOf(s.year + '-' + pad(s.month + 1)) === 0 && s.data.days[k].fav).length;
+
+    // shared day axis
+    const step = 20;
+    const trackW = nDays * step + 24;
+    const axisDays = [];
+    for (let d = 1; d <= nDays; d++) {
+      const lab = pad(d);
+      axisDays.push({
+        top: lab[0], bot: lab[1], label: lab,
+        color: this.key(d) === todayK ? 'var(--red)' : 'var(--dim)',
+        tick: (d % 5 === 0 || d === 1) ? 'var(--hard)' : 'transparent'
+      });
+    }
+    const gridLines = [];
+    for (let v = 8; v >= 0; v--) gridLines.push({ top: r1((1 - v / 8) * 100), style: v === 0 ? 'solid' : 'dashed' });
+
+    // checklist rows (per habit sparkline)
+    const refDay = (s.year === now.getFullYear() && s.month === now.getMonth()) ? now.getDate() : nDays;
+    const streaks = HABITS.map((h, hi) => {
+      let st = 0;
+      for (let d = refDay; d >= 1; d--) { const rec = this.day(this.key(d)); if (rec.h && rec.h[hi]) st++; else break; }
+      return st;
+    });
+    const W = nDays * step;
+    const rows = HABITS.map((h, hi) => {
+      const cells = [];
+      for (let d = 1; d <= nDays; d++) {
+        const k = this.key(d);
+        const rec = this.day(k);
+        const on = !!(rec.h && rec.h[hi]);
+        const locked = this.isLocked(d);
+        cells.push({
+          aria: h[L] + ' ' + pad(d) + (on ? ' Y' : ' N'),
+          cursor: locked ? 'default' : 'pointer',
+          bg: on ? 'var(--red)' : 'transparent',
+          bd: on ? 'var(--red)' : (locked ? 'var(--line)' : 'var(--hard)'),
+          onClick: locked ? (() => {}) : (() => this.setData((dd) => {
+            const r = dd.days[k] || { text: '', fav: false, h: [] };
+            r.h = r.h || [];
+            r.h[hi] = !r.h[hi];
+            dd.days[k] = r;
+            return dd;
+          }))
+        });
+      }
+      return {
+        num: pad(hi + 1), name: h[L], cells: cells,
+        score: stats.per[hi] + '/' + nDays,
+        streakLabel: streaks[hi] >= 2 ? '▲ ' + streaks[hi] : ''
+      };
+    });
+
+    // points chart
+    const H = 200;
+    const yFor = (p) => 8 + (H - 16) * (1 - p / 8);
+    const pointsBars = [];
+    for (let d = 1; d <= nDays; d++) {
+      const locked = this.isLocked(d);
+      const rec = this.day(this.key(d));
+      const p = locked ? 0 : (rec.h || []).filter(Boolean).length;
+      pointsBars.push({
+        pct: r1((p / 8) * 100),
+        fill: p >= 8 ? 'var(--red)' : (p >= 5 ? 'var(--hard)' : 'var(--line)')
+      });
+    }
+
+    const habitScores = HABITS.map((h, hi) => {
+      const hot = streaks[hi] >= 2;
+      const p = Math.round((stats.per[hi] / nDays) * 100);
+      return {
+        num: pad(hi + 1), name: h[L], score: stats.per[hi] + ' / ' + nDays, pct: p,
+        streakLabel: hot ? t.streak + ' ' + streaks[hi] : '',
+        bg: hot ? 'rgba(236,48,19,.09)' : 'transparent',
+        edge: hot ? 'var(--red)' : 'transparent',
+        barColor: hot ? 'var(--red)' : 'var(--hard)',
+        fg: hot ? 'var(--red)' : 'var(--ink)'
+      };
+    });
+
+    // featured
+    const favKeys = Object.keys(s.data.days).filter((k) => s.data.days[k].fav);
+    const favYears = {};
+    favKeys.forEach((k) => { favYears[k.slice(0, 4)] = true; });
+    const yearList = Object.keys(favYears).sort().reverse();
+    if (!yearList.length) yearList.push(String(now.getFullYear()));
+    const favModes = [['all', t.all], ['year', t.byYear]].map((o) => ({
+      label: o[1], bg: s.favMode === o[0] ? 'var(--ink)' : 'transparent', fg: s.favMode === o[0] ? 'var(--paper)' : 'var(--ink)',
+      go: () => this.setState({ favMode: o[0] })
+    }));
+    const favYearOptions = yearList.map((y) => ({
+      label: y, bg: String(s.favYear) === y ? 'var(--red)' : 'transparent', fg: String(s.favYear) === y ? '#fff' : 'var(--ink)',
+      go: () => this.setState({ favYear: y })
+    }));
+    const favList = favKeys.filter((k) => s.favMode === 'all' || k.slice(0, 4) === String(s.favYear))
+      .sort().reverse().map((k) => ({ date: k.slice(8, 10) + '/' + k.slice(5, 7), year: k.slice(0, 4), text: s.data.days[k].text || '—' }));
+
+    const PSYM = [
+      ['M 26 4 L 38 22 L 36 34 L 26 44 L 12 40 L 10 26 L 20 16 L 18 28 L 26 22 Z'],
+      ['M 6 12 L 24 18 V 42 L 6 36 Z', 'M 42 12 L 24 18 V 42 L 42 36 Z'],
+      ['M 4 16 H 12 V 32 H 4 Z', 'M 36 16 H 44 V 32 H 36 Z', 'M 12 20 H 36 V 28 H 12 Z'],
+      ['M 8 40 H 16 V 30 H 8 Z', 'M 20 40 H 28 V 20 H 20 Z', 'M 32 40 H 40 V 8 H 32 Z'],
+      ['M 24 6 L 42 16 V 34 L 24 44 L 6 34 V 16 Z', 'M 24 6 V 24 L 42 34 M 24 24 L 6 34'],
+      ['M 6 38 L 12 16 L 24 30 L 36 16 L 42 38 Z', 'M 24 8 L 27 14 H 21 Z'],
+      ['M 4 24 L 20 24 L 14 18 M 20 24 L 14 30', 'M 44 32 L 28 32 L 34 26 M 28 32 L 34 38'],
+      ['M 34 8 A 18 18 0 1 0 34 40 A 14 14 0 1 1 34 8 Z', 'M 12 14 L 14 18 L 10 18 Z']
+    ];
+    const principles = s.data.principles.map((raw, i) => {
+      const lines = String(raw).split('\n').filter((x) => x.trim());
+      const title = lines.length ? lines[0].replace(/^[-•]\s*/, '') : '';
+      const bullets = lines.slice(1).map((x, bi) => ({ i: pad(bi + 1), text: x.replace(/^[-•]\s*/, '') }));
+      return {
+        num: pad(i + 1), habit: HABITS[i][L], raw: raw, rows: Math.min(18, lines.length + 2), sym: PSYM[i],
+        title: title, bullets: bullets,
+        onEdit: (e) => { const v = e.target.value; this.setData((dd) => { dd.principles[i] = v; return dd; }); }
+      };
+    });
+
+    const durs = [3, 5, 10, 15, 20, 25, 30, 45, 60];
+    const durations = durs.map((d) => ({
+      label: d === 60 ? '1 hr' : d + "'",
+      bg: s.med.dur === d ? 'var(--red)' : 'transparent',
+      fg: s.med.dur === d ? '#fff' : 'var(--ink)',
+      bd: s.med.dur === d ? 'var(--red)' : 'var(--line)',
+      disabled: s.med.running,
+      go: () => this.setState({ med: Object.assign({}, s.med, { dur: d }) })
+    }));
+    const left = s.med.running ? s.med.left : s.med.dur * 60;
+    const clock = Math.floor(left / 60) + ':' + pad(left % 60);
+    const elapsed = s.med.running ? 1 - left / (s.med.dur * 60) : 0;
+    const C = 2 * Math.PI * 84;
+    const handA = (-90 + 360 * elapsed) * Math.PI / 180;
+
+    const wf = s.wishFilter || 'all';
+    const wishFilters = [['all', t.fAll], ['open', t.fOpen], ['done', t.fDone]].map((o) => ({
+      label: o[1], bg: wf === o[0] ? 'var(--ink)' : 'transparent', fg: wf === o[0] ? 'var(--paper)' : 'var(--ink)',
+      go: () => this.setState({ wishFilter: o[0] })
+    }));
+    const wishes = s.data.wishes.map((w, i) => ({
+      title: w.title, desc: w.desc || '', keep: wf === 'all' || (wf === 'done' ? !!w.done : !w.done),
+      deco: w.done ? 'line-through' : 'none',
+      fg: w.done ? 'var(--dim)' : 'var(--ink)',
+      boxBg: w.done ? 'var(--red)' : 'transparent',
+      boxBorder: w.done ? 'var(--red)' : 'var(--hard)',
+      checkOpacity: w.done ? 1 : 0,
+      onToggle: () => this.setData((dd) => { dd.wishes[i].done = !dd.wishes[i].done; return dd; }),
+      onDel: () => this.setData((dd) => { dd.wishes.splice(i, 1); return dd; })
+    })).filter((w) => w.keep);
+
+    const monthOptions = t.monthsShort.map((mm, i) => ({
+      label: mm, bg: s.month === i ? 'var(--red)' : 'transparent', fg: s.month === i ? '#fff' : 'var(--ink)',
+      go: () => this.setState({ month: i, monthPicker: false })
+    }));
+
+    const tabDefs = [['highlights', t.highlights], ['checklist', t.checklist], ['points', t.points], ['score', t.score]];
+    const tabs = tabDefs.map((td) => ({
+      label: td[1], bg: s.tab === td[0] ? 'var(--ink)' : 'transparent', fg: s.tab === td[0] ? 'var(--paper)' : 'var(--ink)',
+      go: () => this.setState({ tab: td[0] })
+    }));
+
+    const noteKey = s.year + '-' + pad(s.month + 1);
+    const noteOpen = (s.year + '-' + pad(s.month + 1) + '-' + pad(nDays)) <= todayK;
+
+    return {
+      t: t, theme: s.theme, anim: s.anim, year: s.year,
+      todayLabel: todayK,
+      screenTitle: titles[s.screen] || t.menu,
+      isMenu: s.screen === 'menu', notMenu: s.screen !== 'menu',
+      isRegistros: s.screen === 'registros', isDestacados: s.screen === 'destacados',
+      isPrincipios: s.screen === 'principios', isMeditacion: s.screen === 'meditacion',
+      isDeseos: s.screen === 'deseos',
+      goMenu: () => { if (this.state.med.running) this.endMed(true); this.setState({ screen: 'menu', monthPicker: false }); },
+      openSettings: () => this.setState({ settingsOpen: true }),
+      closeSettings: () => this.setState({ settingsOpen: false, status: '' }),
+      settingsOpen: s.settingsOpen,
+      prevYear: () => this.setState({ year: s.year - 1 }),
+      nextYear: () => this.setState({ year: s.year + 1 }),
+      yearBadge: this.badge(this.rankFor(yPct)),
+      yearPctLabel: yPct + '% · ' + yTotal + ' ' + t.pts,
+      monthBadge: this.badge(this.rankFor(pct)),
+      monthLabel: t.months[s.month],
+      monthPicker: s.monthPicker,
+      toggleMonthPicker: () => this.setState({ monthPicker: !s.monthPicker }),
+      monthOptions: monthOptions, tabs: tabs,
+      isHighlights: s.tab === 'highlights', isChecklist: s.tab === 'checklist',
+      isPoints: s.tab === 'points', isScore: s.tab === 'score',
+      dayRows: dayRows, axisDays: axisDays, trackW: trackW, rows: rows,
+      favCountLabel: favCount ? favCount + ' ' + t.favs : '',
+      monthNote: s.data.notes[noteKey] || '',
+      monthNoteLocked: !noteOpen,
+      monthNotePlaceholder: noteOpen ? t.monthNoteOpen : t.monthNotePlaceholder,
+      onMonthNote: (e) => { const v = e.target.value; this.setData((dd) => { dd.notes[noteKey] = v; return dd; }); },
+      yAxis: [8, 7, 6, 5, 4, 3, 2, 1, 0],
+      gridLines: gridLines, pointsBars: pointsBars,
+      monthTotalLabel: stats.total + ' / ' + stats.max,
+      monthPctLabel: pct + '% · ' + t.monthsShort[s.month] + ' ' + s.year,
+      habitScores: habitScores,
+      favModes: favModes, favYearMode: s.favMode === 'year', favYearOptions: favYearOptions,
+      favList: favList, hasFavs: favList.length > 0, noFavs: favList.length === 0,
+      principles: principles, editing: s.editing, notEditing: !s.editing,
+      editLabel: s.editing ? t.done : t.edit,
+      toggleEdit: () => this.setState({ editing: !s.editing }),
+      neverList: s.data.never.map((n, i) => ({ text: n.text, at: (n.at || '').slice(5).replace('-', '/'), onDel: () => this.setData((dd) => { dd.never.splice(i, 1); return dd; }) })),
+      nfDraft: s.nfDraft,
+      onNfDraft: (e) => this.setState({ nfDraft: e.target.value }),
+      addNever: () => { const v = s.nfDraft.trim(); if (!v) return; this.setData((dd) => { dd.never.unshift({ text: v, at: todayK }); return dd; }, { nfDraft: '' }); },
+      durations: durations,
+      med: {
+        clock: clock, dash: r1(C * elapsed) + ' ' + r1(C), running: s.med.running,
+        hint: s.med.running ? t.running : t.start,
+        handX: r1(100 + 74 * Math.cos(handA)), handY: r1(100 + 74 * Math.sin(handA)),
+        handOp: s.med.running ? 1 : 0
+      },
+      medAsk: s.med.ask,
+      clockClick: () => { if (s.med.running) this.endMed(true); else this.setState({ med: Object.assign({}, s.med, { ask: true }) }); },
+      medReady: () => this.startMed(),
+      medCancel: () => this.setState({ med: Object.assign({}, s.med, { ask: false }) }),
+      stopMed: () => this.endMed(true),
+      noMusic: !s.data.music,
+      wishes: wishes, noWishes: wishes.length === 0, wishFilters: wishFilters,
+      wishDraft: s.wishDraft, wishDesc: s.wishDesc,
+      onWishDraft: (e) => this.setState({ wishDraft: e.target.value }),
+      onWishDesc: (e) => this.setState({ wishDesc: e.target.value }),
+      addWish: () => { const v = s.wishDraft.trim(); if (!v) return; this.setData((dd) => { dd.wishes.unshift({ title: v, desc: s.wishDesc.trim(), done: false }); return dd; }, { wishDraft: '', wishDesc: '', wishModal: false }); },
+      wishModal: s.wishModal,
+      openWishModal: () => this.setState({ wishModal: true }),
+      closeWishModal: () => this.setState({ wishModal: false }),
+      tiles: tiles, rankTally: rankTally,
+      themeOptions: [['paper', t.paper], ['dark', t.dark]].map((o) => ({
+        label: o[1], bg: s.theme === o[0] ? 'var(--ink)' : 'transparent', fg: s.theme === o[0] ? 'var(--paper)' : 'var(--ink)',
+        go: () => this.setState({ theme: o[0] }, () => this.persist())
+      })),
+      langOptions: [['es', 'Español'], ['en', 'English']].map((o) => ({
+        label: o[1], bg: s.lang === o[0] ? 'var(--ink)' : 'transparent', fg: s.lang === o[0] ? 'var(--paper)' : 'var(--ink)',
+        go: () => this.setState({ lang: o[0] }, () => this.persist())
+      })),
+      musicLabel: s.data.music ? s.data.music.name : t.noMusicSet,
+      hasMusic: !!s.data.music,
+      onMusicFile: (e) => this.musicFile(e),
+      clearMusic: () => this.setData((dd) => { dd.music = null; return dd; }),
+      exportData: () => this.exportData(),
+      onImportFile: (e) => this.importFile(e),
+      statusMsg: s.status
+    };
+  }
+}
+</script>
+</body>
+</html>
