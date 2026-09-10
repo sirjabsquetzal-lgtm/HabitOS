@@ -5,7 +5,7 @@
 // doesn't change. The browser only re-installs a service worker when sw.js's bytes differ from
 // the one it already has — if only css/js/html changed, this file must change too or the old
 // worker keeps serving its stale cache forever (cache-first assets included).
-var CACHE = 'habitos-shell-v2';
+var CACHE = 'habitos-shell-v3';
 var SHELL = [
   './',
   './index.html',

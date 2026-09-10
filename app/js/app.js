@@ -751,7 +751,7 @@ function renderSettingsModal(t, s) {
   html += '<div class="settings-section"><div class="settings-section__label">' + esc(t.appearance) + '</div><div class="settings-toggle">';
   [['paper', t.paper], ['dark', t.dark]].forEach(function (o) {
     var active = s.theme === o[0];
-    html += '<button class="settings-toggle__btn" data-action="theme-set" data-theme="' + o[0] + '" style="background:' + (active ? 'var(--ink)' : 'transparent') + ';color:' + (active ? 'var(--paper)' : 'var(--ink)') + '">' + esc(o[1]) + '</button>';
+    html += '<button class="settings-toggle__btn" data-action="theme-set" data-theme-value="' + o[0] + '" style="background:' + (active ? 'var(--ink)' : 'transparent') + ';color:' + (active ? 'var(--paper)' : 'var(--ink)') + '">' + esc(o[1]) + '</button>';
   });
   html += '</div></div>';
 
@@ -843,7 +843,7 @@ var actions = {
   'med-ready': function () { startMed(); },
   'med-cancel': function () { state.med.ask = false; render(); },
   'med-stop': function () { endMed(true); },
-  'theme-set': function (el) { state.theme = el.getAttribute('data-theme'); persistNow(); render(); },
+  'theme-set': function (el) { state.theme = el.getAttribute('data-theme-value'); persistNow(); render(); },
   'lang-set': function (el) { state.lang = el.getAttribute('data-lang'); persistNow(); render(); },
   'data-export': function () { exportData(); },
   'music-clear': function () {
