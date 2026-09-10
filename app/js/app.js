@@ -906,6 +906,14 @@ function boot() {
   render();
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    // reload once when a new service worker takes over, so a shipped fix (new CSS/JS) shows up
+    // immediately instead of waiting for the visitor to notice and hard-refresh themselves.
+    var reloading = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (reloading) return;
+      reloading = true;
+      location.reload();
+    });
     window.addEventListener('load', function () {
       navigator.serviceWorker.register('sw.js')['catch'](function () {});
     });

@@ -1,6 +1,11 @@
 // HabitOS service worker — caches the app shell so the installed app opens offline.
 // Data itself never goes through here: it lives in localStorage / IndexedDB on the device.
-var CACHE = 'habitos-shell-v1';
+//
+// IMPORTANT: bump CACHE (e.g. v2 -> v3) whenever shipping a fix, even if this file's own logic
+// doesn't change. The browser only re-installs a service worker when sw.js's bytes differ from
+// the one it already has — if only css/js/html changed, this file must change too or the old
+// worker keeps serving its stale cache forever (cache-first assets included).
+var CACHE = 'habitos-shell-v2';
 var SHELL = [
   './',
   './index.html',
@@ -20,6 +25,9 @@ var SHELL = [
   './assets/insignia/D-light.png', './assets/insignia/D-dark.png',
   './assets/insignia/E-light.png', './assets/insignia/E-dark.png'
 ];
+// requests matching these get network-first (always try to fetch the latest code first,
+// falling back to cache only when offline) — anything code-shaped that we might fix again.
+var NETWORK_FIRST = /\.(html|css|js|webmanifest)$/;
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -35,13 +43,27 @@ self.addEventListener('activate', function (event) {
   );
 });
 
+self.addEventListener('message', function (event) {
+  if (event.data === 'skip-waiting') self.skipWaiting();
+});
+
 self.addEventListener('fetch', function (event) {
   var req = event.request;
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
+  var isNavigation = req.mode === 'navigate';
 
-  if (url.origin === self.location.origin) {
-    // app shell: cache-first, refresh in the background
+  if (url.origin === self.location.origin && (isNavigation || NETWORK_FIRST.test(url.pathname))) {
+    // app code (html/css/js/manifest): network-first, so a fix is visible on the very next
+    // load instead of waiting for a stale cache-first response to be replaced in the background.
+    event.respondWith(
+      fetch(req).then(function (res) {
+        if (res && res.status === 200) caches.open(CACHE).then(function (c) { c.put(req, res.clone()); });
+        return res;
+      })['catch'](function () { return caches.match(req).then(function (c) { return c || caches.match('./index.html'); }); })
+    );
+  } else if (url.origin === self.location.origin) {
+    // static binary assets (icons, badge images): cache-first, refresh in the background
     event.respondWith(
       caches.match(req).then(function (cached) {
         var fetchPromise = fetch(req).then(function (res) {
