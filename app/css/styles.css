@@ -19,11 +19,15 @@ html, body { margin: 0; padding: 0; background: #f3f2f2; }
 }
 
 body { font-family: Archivo, sans-serif; -webkit-font-smoothing: antialiased; }
-input, textarea, button, select { font-family: Archivo, sans-serif; }
-button { appearance: none; -webkit-appearance: none; }
+/* form controls don't inherit color/font from the page by default (the browser gives them their
+   own UA text color, which ignores our theme) — reset that so every button/input/textarea always
+   follows --ink unless a class overrides it, in both paper and dark. */
+input, textarea, button, select { font-family: Archivo, sans-serif; color: inherit; }
+button { appearance: none; -webkit-appearance: none; background: none; }
 a { color: #ec3013; text-decoration: none; }
 a:hover { color: #ae1800; }
 input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+::placeholder { color: var(--dim); opacity: 1; }
 ::selection { background: rgba(236,48,19,.28); }
 [data-glow="1"] { box-shadow: var(--glow); }
 ::-webkit-scrollbar { height: 6px; width: 6px; }
@@ -240,7 +244,7 @@ input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px
 .med-dur-btn { padding: 16px 4px; border: 1px solid var(--line); cursor: pointer; font-family: Doto, Archivo, sans-serif; font-size: 16px; font-weight: 900; letter-spacing: .04em; background: transparent; color: var(--ink); }
 .med-dur-btn[disabled] { cursor: default; opacity: .55; }
 .med-stage { display: grid; place-items: center; gap: 22px; }
-.med-clock { position: relative; width: 272px; height: 272px; max-width: 84vw; max-height: 84vw; background: transparent; border: 0; cursor: pointer; padding: 0; display: grid; place-items: center; border-radius: 50%; }
+.med-clock { position: relative; width: 272px; height: 272px; max-width: 84vw; max-height: 84vw; background: transparent; border: 0; color: var(--ink); cursor: pointer; padding: 0; display: grid; place-items: center; border-radius: 50%; }
 .med-clock__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .med-clock__center { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .med-clock__time { font-family: Doto, Archivo, sans-serif; font-size: 48px; font-weight: 900; letter-spacing: .03em; }
